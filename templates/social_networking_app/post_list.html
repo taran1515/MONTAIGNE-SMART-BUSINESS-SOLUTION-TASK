@@ -1,0 +1,33 @@
+{% extends 'social_networking_app/base.html'%}
+{% block abc%}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<link>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'social_networking_app/style.css'%}" </link>
+    <title>Title</title>
+</head>
+<body>
+<h1>Social Netorking App</h1><br><br><H4>Hy {{ Profile.user }}</H4><br><br>
+<div class="container">
+    <div class="row">
+        {% for p in post %}
+          <div class="col-md-6">
+              <div class="img-thumbnail">
+                  <a href="{% url 'post_detail' p.id %}">{{ p.title }}</a><br><small style="float:right">{{ p.created }}</small><br>
+                  Author: {{ p.author }}<br>
+                  {{p.body}}<br>
+              </div>
+          </div>
+        {% endfor %}
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5cbb04bfa4f26d42"></script>
+    </div>
+</div>
+<br><br><br>
+<h3> Click <a href="{% url 'post_create' %}">here </a>to post your Status</h3>
+</body>
+</html>
+{% endblock %}

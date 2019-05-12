@@ -1,0 +1,64 @@
+{% extends 'social_networking_app/base.html'%}
+{% block abc%}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<link>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'social_networking_app/style.css'%}" </link>
+    <title>Title</title>
+</head>
+<style>
+    h1{
+    text-align:center;}
+</style>
+<body>
+<h1 text-align="center">Social Netorking App</h1><br><br><hr>
+<div class="container">
+    <h3>Status title - {{ post.title }}</h3><br>
+    <small> Post created by {{ post.author }}</small>
+    <hr><br><br>
+    <h2> Status - <bold> {{ post.body }} </bold> </h2><br><br>
+</div>
+
+{{ total_likes }} Like{{ total_likes|pluralize }}<br>
+{% if request.user.is_authenticated %}
+
+<form action="{% url 'like_post' %}" method="post">
+  {% csrf_token %}
+  {% if is_liked %}
+    <button type="submit" id="like" name="post_id" value="{{ post.id }}" class="btn btn-danger">Dislike</button>
+  {% else %}
+    <button type="submit" id="like" name="post_id" value="{{ post.id }}" class="btn btn-primary">Like</button>
+  {% endif %}
+</form>
+{% endif %}
+
+
+
+<form method="post">
+
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <input type="submit" value="Submit" class="btn btn-outline-success">
+
+</form>
+
+
+
+<br><br>
+<div class="main-comment-section">
+    {{ comments.count }} Comment <br><br>
+    {% for comment in comments %}
+    <blockquote class="blockquote">
+        <p class="mb-0">{{ comment.text }}</p>
+        <footer class="blockquote-footer">by <cite title="Source Title">{{ comment.user|capfirst }}</cite> </footer>
+    </blockquote>
+
+    {% endfor %}
+</div>
+</body>
+</html>
+{% endblock %}

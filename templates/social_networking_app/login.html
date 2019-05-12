@@ -1,0 +1,11 @@
+{% extends 'social_networking_app/base.html'%}
+{% block abc%}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <small>
+        <a href="{% url 'register' %}">Register</a>
+    </small>
+    <input type="submit" value = "Login" class="btn btn-outline-success">
+</form>
+{% endblock %}

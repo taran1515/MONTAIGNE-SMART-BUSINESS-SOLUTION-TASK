@@ -1,0 +1,10 @@
+{% extends 'social_networking_app/base.html'%}
+{% block abc%}
+<h1 text-align="centre">Social Networking App</h1><hr>
+<p>New Member? Register Here OR Else Login to go the app</p><br><br>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" class="btn btn-outline-success">
+</form>
+{% endblock %}

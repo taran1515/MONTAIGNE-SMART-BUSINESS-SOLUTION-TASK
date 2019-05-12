@@ -1,0 +1,20 @@
+{% extends 'social_networking_app/base.html'%}
+{% block abc%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Form</title>
+</head>
+<body>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Create" class="btn btn-oulined-success">
+
+</form>
+<p>Click <a href="http://127.0.0.1:8000/view_post/">here </a> to go back to view your shared status</p>
+</body>
+</html>
+{% endblock %}
